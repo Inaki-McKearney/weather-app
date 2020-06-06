@@ -12,7 +12,7 @@ function App() {
   // Get initial user coordinates
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(loadLocalWeather);
-  });
+  }, []);
 
   const loadLocalWeather = (pos) => {
     let url = new URL(api.base);
