@@ -94,6 +94,13 @@ function App() {
             ''
           )}
         </div>
+        {weather.cod === '404' ? (
+          <div className="error-box">
+            <div className="error">{weather.message.toUpperCase()}</div>
+          </div>
+        ) : (
+          ''
+        )}
       </main>
     </div>
   );
