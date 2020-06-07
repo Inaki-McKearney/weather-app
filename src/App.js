@@ -1,59 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import SearchBar from './components/SearchBar';
+import Location from './components/Location';
+import CurrentDate from './components/CurrentDate';
+import Temperature from './components/Temperature';
+import WeatherType from './components/WeatherType';
+import Error from './components/Error';
+import Message from './components/Message';
+
 const api = {
   key: '79313e325d1f563d35fc3c61b805604a',
-  base: 'https://api.openweathermap.org/data/2.5/weather',
+  url: 'https://api.openweathermap.org/data/2.5/weather',
 };
 
 function App() {
-  const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
-  // const [coords, setCoords] = useState({});
 
   // Get initial user coordinates
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(loadLocalWeather);
+    loadLocalWeather();
   }, []);
 
-  const loadLocalWeather = (pos) => {
-    let url = new URL(api.base);
-    url.search = new URLSearchParams({
-      lat: pos.coords.latitude,
-      lon: pos.coords.longitude,
-      units: 'metric',
-      APPID: api.key,
-    });
+  useEffect(() => console.log(weather));
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((result) => {
-        setWeather(result);
-      });
-  };
-
-  const search = (evt) => {
-    if (evt.key === 'Enter') {
-      let url = new URL(api.base);
+  const loadLocalWeather = () => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      let url = new URL(api.url);
       url.search = new URLSearchParams({
-        q: query,
+        lat: pos.coords.latitude,
+        lon: pos.coords.longitude,
         units: 'metric',
         APPID: api.key,
       });
 
-      // fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
       fetch(url)
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setQuery('');
-          console.log(result); //delete
         });
-    }
-  };
-
-  const getDate = () => {
-    let date = new Date();
-    return date.toLocaleString('en-GB', {
-      dateStyle: 'full',
     });
   };
 
@@ -64,43 +47,22 @@ function App() {
       }
     >
       <main>
-        <div className="search-box">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search..."
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            onKeyUp={search}
-          />
-        </div>
-        <div>
-          <div className="location-box">
-            {weather.name ? (
-              <div className="location">
-                {weather.name}, {weather.sys.country}
-              </div>
-            ) : (
-              ''
-            )}
-            <div className="date">{getDate()}</div>
+        <SearchBar api={api} setWeather={setWeather} />
+        <Location weather={weather} />
+        <CurrentDate />
+
+        {weather.main ? (
+          <div className="weather-box">
+            <Temperature temp={Math.round(weather.main.temp)} />
+            <WeatherType type={weather.weather[0]} />
           </div>
-          {weather.main ? (
-            <div className="weather-box">
-              <div className="temp">{Math.round(weather.main.temp)}°C</div>
-              <div className="weather">{weather.weather[0].main}</div>
-            </div>
-          ) : (
-            ''
-          )}
-        </div>
-        {weather.cod === '404' ? (
-          <div className="error-box">
-            <div className="error">{weather.message.toUpperCase()}</div>
-          </div>
+        ) : !weather.cod ? (
+          <Message message="Please enable location tracking or use the search bar above" />
         ) : (
           ''
         )}
+
+        <Error weather={weather} />
       </main>
     </div>
   );

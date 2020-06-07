@@ -2,31 +2,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: 'montseratt', sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .app {
-  background-image: url('./assets/warm.jpg');
+  background-image: url('./assets/default.jpg');
   background-size: cover;
-  background-position: bottom;
-  transition: 0.4s ease;
+  background-repeat: no-repeat;
+  background-position: center top fixed;
+  transition: 0.5s ease-in-out;
 }
-
 .app.clouds {
   background-image: url('./assets/clouds.jpg');
 }
-.app.rain {
-  background-image: url('./assets/rain2.jpg');
+.app.rain,
+.app.drizzle {
+  background-image: url('./assets/rain.jpg');
 }
 .app.clear {
   background-image: url('./assets/sun.jpg');
 }
-/* .app.snow {
-        background-image: url('./assets/snow.jpg');
-      } */
+.app.thunderstorm {
+  background-image: url('./assets/thunderstorm.jpg');
+}
+.app.snow {
+  background-image: url('./assets/snow.jpg');
+}
 
 main {
   min-height: 100vh;
@@ -47,18 +48,18 @@ main {
   width: 100%;
   padding: 15px;
 
-  appearance: none;
-  background: none;
+  /* appearance: none; */
+  /* background: none; */
+  /* outline: none; */
   border: none;
-  outline: none;
 
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 50px;
   margin-bottom: -25px;
 
   box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
-  color: #313131;
-  font-size: 20px;
+  color: #202020;
+  font-size: 30px;
   transition: 0.4s ease;
 }
 
@@ -77,13 +78,14 @@ main {
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 
-.location-box .date {
+.date {
   color: #fff;
   font-size: 20px;
   font-weight: 300;
   font-style: italic;
   text-align: center;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+  padding: 10px;
 }
 
 .weather-box,
@@ -116,7 +118,15 @@ main {
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 
-.error {
+.weather-box .weather img {
+  vertical-align: middle;
+  /* margin-bottom: 10px;
+  margin-left: 10px; */
+  margin: 0px 0px 10px 10px;
+}
+
+.error,
+.message {
   position: relative;
   display: inline-block;
 
@@ -124,12 +134,19 @@ main {
   color: #fff;
   font-size: 48px;
   text-shadow: 3px 3px rgba(0, 0, 0, 0.5);
+  text-transform: capitalize;
 
-  margin: 40px auto;
+  margin: 40px;
   padding: 15px;
 
-  border: 1px solid black;
-  background-color: rgba(236, 22, 22, 0.2);
+  /* border: 1px solid black; */
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.message {
+  font-size: 40px;
+
+  text-transform: none;
 }
