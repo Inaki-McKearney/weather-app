@@ -20,8 +20,6 @@ function App() {
     loadLocalWeather();
   }, []);
 
-  useEffect(() => console.log(weather));
-
   const loadLocalWeather = () => {
     navigator.geolocation.getCurrentPosition((pos) => {
       let url = new URL(api.url);
