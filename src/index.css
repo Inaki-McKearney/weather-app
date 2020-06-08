@@ -48,9 +48,6 @@ main {
   width: 100%;
   padding: 15px;
 
-  /* appearance: none; */
-  /* background: none; */
-  /* outline: none; */
   border: none;
 
   background-color: rgba(255, 255, 255, 0.6);
@@ -65,9 +62,6 @@ main {
 
 .search-box .search-bar:focus {
   background-color: rgba(255, 255, 255, 0.85);
-  /* border-radius: 0px 0px 16px 16px;
-  margin-top: -25px;
-  margin-bottom: 0px; */
 }
 
 .location-box .location {
@@ -120,8 +114,6 @@ main {
 
 .weather-box .weather img {
   vertical-align: middle;
-  /* margin-bottom: 10px;
-  margin-left: 10px; */
   margin: 0px 0px 10px 10px;
 }
 
@@ -147,6 +139,5 @@ main {
 
 .message {
   font-size: 40px;
-
   text-transform: none;
 }
