@@ -1,4 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🌦 :umbrella: React Weather App
+
+:white_sun_rain:
+:umbrella:
+A simple react app for displaying the current weather by location.
+
+## Live Demo
+
+[React Weather App](https://imck.dev/weather-app)
 
 ## Available Scripts
 
