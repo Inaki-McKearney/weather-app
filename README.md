@@ -1,7 +1,5 @@
-# 🌦 :umbrella: React Weather App
+# :umbrella: React Weather App
 
-:white_sun_rain:
-:umbrella:
 A simple react app for displaying the current weather by location.
 
 ## Live Demo
